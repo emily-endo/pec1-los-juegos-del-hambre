@@ -1,0 +1,6 @@
+@use "sass:math";
+
+// Convierte una medida en px a rem tomando 16px como referencia.
+@function to-rem($pixels) {
+  @return math.div($pixels, 16px) * 1rem;
+}

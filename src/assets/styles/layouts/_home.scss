@@ -1,0 +1,267 @@
+@use "../variables";
+@use "../functions";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: variables.$font-body;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: variables.$color-text;
+  background-color: variables.$color-background;
+}
+
+h1,
+h2,
+h3 {
+  font-family: variables.$font-heading;
+  line-height: 1.2;
+}
+
+a {
+  color: variables.$color-accent;
+}
+
+.site-header,
+main,
+.site-footer {
+  width: min(100% - 2rem, variables.$content-width);
+  margin-inline: auto;
+}
+
+.site-header,
+.site-footer {
+  padding-block: functions.to-rem(24px);
+}
+
+section {
+  padding-block: functions.to-rem(40px);
+}
+
+// Components
+
+.skip-link {
+  position: absolute;
+  top: -10rem;
+  left: 1rem;
+  z-index: 10;
+  padding: functions.to-rem(12px);
+  color: variables.$color-background;
+  background-color: variables.$color-accent;
+
+  &:focus {
+    top: 1rem;
+  }
+}
+
+.site-header {
+  display: flex;
+  flex-direction: column;
+  gap: functions.to-rem(16px);
+  border-bottom: 1px solid variables.$color-muted;
+
+  &__brand {
+    width: fit-content;
+    font-family: variables.$font-heading;
+    font-size: functions.to-rem(24px);
+    font-weight: 700;
+    text-decoration: none;
+  }
+}
+
+.site-nav {
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: functions.to-rem(20px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__link {
+    color: variables.$color-text;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.25em;
+    }
+  }
+}
+
+.core {
+  padding-block: functions.to-rem(64px);
+
+  &__content {
+    max-width: 48rem;
+  }
+
+  &__intro {
+    margin: 0 0 1rem;
+    color: variables.$color-accent;
+    font-weight: 700;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
+  }
+
+  &__author {
+    margin-block: 1rem;
+    color: variables.$color-accent;
+    font-size: functions.to-rem(20px);
+  }
+
+  &__description {
+    max-width: 55ch;
+    margin-bottom: 2rem;
+    font-size: functions.to-rem(18px);
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: functions.to-rem(12px) functions.to-rem(20px);
+  border: 2px solid transparent;
+  border-radius: 0.25rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+
+  &--primary {
+    color: variables.$color-background;
+    background-color: variables.$color-accent;
+
+    &:hover {
+      border-color: variables.$color-accent;
+      color: variables.$color-accent;
+      background-color: variables.$color-background;
+    }
+  }
+}
+
+.book-overview {
+  &__title {
+    margin-top: 0;
+    font-size: functions.to-rem(32px);
+  }
+
+  &__text {
+    max-width: 70ch;
+  }
+
+  &__details {
+    display: grid;
+    gap: functions.to-rem(24px);
+    margin: 2rem 0 0;
+    padding: functions.to-rem(24px);
+    background-color: variables.$color-surface;
+  }
+
+  dt {
+    color: variables.$color-accent;
+    font-weight: 700;
+  }
+
+  dd {
+    margin: 0.25rem 0 0;
+  }
+}
+
+.reading-reasons {
+  &__title {
+    margin-top: 0;
+    font-size: functions.to-rem(32px);
+  }
+
+  &__grid {
+    display: grid;
+    gap: functions.to-rem(24px);
+  }
+}
+
+.reason-card {
+  padding: functions.to-rem(24px);
+  border-top: 3px solid variables.$color-accent;
+  border-radius: 0.25rem;
+  background-color: variables.$color-surface;
+
+  &__title {
+    margin-top: 0;
+    font-size: functions.to-rem(24px);
+  }
+
+  &__text {
+    margin-bottom: 0;
+    color: variables.$color-muted;
+  }
+
+  &__icon {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: variables.$color-accent;
+    font-size: functions.to-rem(28px);
+  }
+
+}
+
+.book-themes {
+  &__title {
+    margin-top: 0;
+    font-size: functions.to-rem(32px);
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: functions.to-rem(12px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    padding: functions.to-rem(8px) functions.to-rem(16px);
+    border: 1px solid variables.$color-accent;
+    border-radius: 2rem;
+  }
+}
+
+.site-footer {
+  margin-top: 2rem;
+  border-top: 1px solid variables.$color-muted;
+
+  &__text {
+    color: variables.$color-muted;
+    font-size: functions.to-rem(14px);
+  }
+
+  &__link {
+    text-underline-offset: 0.25em;
+  }
+}
+
+// Responsive adjustments
+
+@media (min-width: variables.$breakpoint-tablet) {
+  .site-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .book-overview__details {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: variables.$breakpoint-desktop) {
+  .reading-reasons__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
